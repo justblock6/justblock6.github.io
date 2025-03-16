@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MPD>
+  <Period>
+    <AdaptationSet>
+      <Representation id="1">
+        <BaseURL>video.mp4</BaseURL>
+        <Label><![CDATA[<script>alert(document.cookie)</script>]]></Label>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
