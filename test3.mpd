@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<MPD type="static" mediaPresentationDuration="PT0H4M0.00S">
+    <Period>
+        <AdaptationSet>
+            <Representation id="1" bandwidth="99999999999999999999999999">
+                <BaseURL>video.mp4</BaseURL>
+                <SegmentList>
+                    <SegmentURL media="segment1.mp4"/>
+                    <SegmentURL media="segment2.mp4"/>
+                </SegmentList>
+            </Representation>
+        </AdaptationSet>
+    </Period>
+</MPD>
