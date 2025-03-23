@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flybuys Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
+            max-width: 350px;
+        }
+        .login-container h2 {
+            color: #007bc1;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-btn {
+            background: #007bc1;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-btn:hover {
+            background: #005f91;
+        }
+        .disclaimer {
+            font-size: 12px;
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Sign in to Flybuys</h2>
+        <form action="#" method="POST">
+            <input type="text" class="input-field" placeholder="Email or Flybuys number" required>
+            <input type="password" class="input-field" placeholder="Password" required>
+            <button type="submit" class="login-btn">Sign In</button>
