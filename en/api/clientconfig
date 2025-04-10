@@ -1,0 +1,6 @@
+{
+  "testConfig": "hello from testttt",
+  "features": {
+    "xssTesting": true
+  }
+}
