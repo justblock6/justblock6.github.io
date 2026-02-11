@@ -1,1 +1,61 @@
-{"testtt":"idk<img src=x onerror=prompt()>"}
+{
+  "schemaVersion": "1.0.0",
+  "id": "example-game-id",
+  "environment": {
+    "name": "prod"
+  },
+  "brand": {
+    "name": "Example Brand",
+    "shortName": "EX"
+  },
+  "gameVariant": {
+    "name": "example-variant",
+    "engine": {
+      "id": "engine-1",
+      "connections": {
+        "hostURL": "https://example.com",
+        "loginURL": "https://example.com/login",
+        "socketPathURL": "/socket",
+        "socketURL": "wss://example.com/socket"
+      }
+    },
+    "rules": "rules-identifier",
+    "paytable": "paytable-identifier",
+    "features": {}
+  },
+  "jurisdiction": {
+    "name": "ExampleJurisdiction",
+    "country": "US",
+    "currency": {
+      "isoCode": "USD",
+      "symbol": "$"
+    },
+    "certification": {
+      "message": "Certified for testing",
+      "name": "Example Authority"
+    }
+  },
+  "analytics": {
+    "providers": {
+      "eventTracker": {
+        "componentIdentifier": "component-1",
+        "gameIdentifier": "game-1"
+      },
+      "google": {
+        "GTMID": ""
+      }
+    }
+  },
+  "observability": {
+    "providers": {
+      "newRelic": {
+        "enabled": false,
+        "scriptIdentifier": ""
+      }
+    }
+  },
+  "tools": {
+    "debug": false,
+    "resultVerification": false
+  }
+}
