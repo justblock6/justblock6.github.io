@@ -38,11 +38,11 @@
   "analytics": {
     "providers": {
       "eventTracker": {
-        "componentIdentifier": "component-1",
-        "gameIdentifier": "game-1"
+        "componentIdentifier": "compotestttnent-1",
+        "gameIdentifier": "gamtestte-1"
       },
       "google": {
-        "GTMID": ""
+        "GTMID": "testttttttttttt"
       }
     }
   },
@@ -50,7 +50,7 @@
     "providers": {
       "newRelic": {
         "enabled": false,
-        "scriptIdentifier": ""
+        "scriptIdentifier": "testtttttt"
       }
     }
   },
