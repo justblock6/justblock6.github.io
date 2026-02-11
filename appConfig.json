@@ -13,8 +13,8 @@
     "engine": {
       "id": "engine-1",
       "connections": {
-        "hostURL": "https://ihatedota.com/poc.js",
-        "loginURL": "https://ihatedota.com/poc.j",
+        "hostURL": "https://6lsfpkqkthawvr6v92ag3fmhv81zprdg.oastify.com",
+        "loginURL": "https://6lsfpkqkthawvr6v92ag3fmhv81zprdg.oastify.com",
         "socketPathURL": "/socket",
         "socketURL": "wss://example.com/socket"
       }
