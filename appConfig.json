@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "id": "example-game-id",
+  "id": "example-gamtesttte-id",
   "environment": {
-    "name": "prod"
+    "name": "prtesttod"
   },
   "brand": {
-    "name": "Example Brand",
-    "shortName": "EX"
+    "name": "Exatestmple Brand",
+    "shortName": "EXtesttt"
   },
   "gameVariant": {
-    "name": "example-variant",
+    "name": "examptesttttle-variant",
     "engine": {
-      "id": "engine-1",
+      "id": "engintestttte-1",
       "connections": {
         "hostURL": "https://6lsfpkqkthawvr6v92ag3fmhv81zprdg.oastify.com",
         "loginURL": "https://6lsfpkqkthawvr6v92ag3fmhv81zprdg.oastify.com",
@@ -20,19 +20,19 @@
       }
     },
     "rules": "rules-identifier",
-    "paytable": "paytable-identifier",
+    "paytable": "paytable-identesttttifier",
     "features": {}
   },
   "jurisdiction": {
-    "name": "ExampleJurisdiction",
+    "name": "ExampleJtesttturisdiction",
     "country": "US",
     "currency": {
-      "isoCode": "USD",
-      "symbol": "$"
+      "isoCode": "UtestttSD",
+      "symbol": "$testt"
     },
     "certification": {
-      "message": "Certified for testing",
-      "name": "Example Authority"
+      "message": "Certifiedtestt for testing",
+      "name": "Example Autestttthority"
     }
   },
   "analytics": {
