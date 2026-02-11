@@ -55,7 +55,7 @@
     }
   },
   "tools": {
-    "debug": false,
+    "debug": true,
     "resultVerification": false
   }
 }
