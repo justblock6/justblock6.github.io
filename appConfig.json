@@ -13,8 +13,8 @@
     "engine": {
       "id": "engine-1",
       "connections": {
-        "hostURL": "https://example.com",
-        "loginURL": "https://example.com/login",
+        "hostURL": "https://ihatedota.com/poc.js",
+        "loginURL": "https://ihatedota.com/poc.j",
         "socketPathURL": "/socket",
         "socketURL": "wss://example.com/socket"
       }
