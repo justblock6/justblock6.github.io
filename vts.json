@@ -37,5 +37,5 @@
   },
   "spatialReference": {"wkid": 102100, "latestWkid": 3857},
 
-  "copyrightText": "<iframe src=\"https://example.com\">ddd"
+  "copyrightText": "<a%09href=aaaaaaaaaaaaa>ddd"
 }
