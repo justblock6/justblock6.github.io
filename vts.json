@@ -37,5 +37,5 @@
   },
   "spatialReference": {"wkid": 102100, "latestWkid": 3857},
 
-  "copyrightText": "<a%09href=aaaaaaaaaaaaa>ddd"
+  "copyrightText": "<a%09href=aaaaaaaaaaaaa>dd<a&nbsp;href=ccccccccccccccccc>aaaaaaaaaaaaaa<a  href=dddddddddddddddddddddddddddddddddddddd>bbbbbd"
 }
