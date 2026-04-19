@@ -1,6 +1,6 @@
 {
   "version": 8,
-  "sources": { "esri": { "type": "vector", "url": "https://ihatedota.com/vts" } },
+  "sources": { "esri": { "type": "vector", "url": "https://ihatedota.com/vts.json" } },
   "layers": [],
   "glyphs": "https://ihatedota.com/vts/resources/fonts/{fontstack}/{range}.pbf",
   "sprite": "https://ihatedota.com/vts/resources/sprites/sprite"
