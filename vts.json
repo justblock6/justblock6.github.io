@@ -36,5 +36,5 @@
     "spatialReference": {"wkid": 102100, "latestWkid": 3857}
   },
   "spatialReference": {"wkid": 102100, "latestWkid": 3857},
-  "copyrightText":"ddAAAbbbb\<<noembed>a href=xxx>dddaaaddd"
+  "copyrightText":"ddAAAbbbbb<style>:target {transform: rotate(180deg);}</style><a id=x style=\"transition:transform 2s\"ontransitionrun=print()></a>d"
 }
