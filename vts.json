@@ -36,5 +36,5 @@
     "spatialReference": {"wkid": 102100, "latestWkid": 3857}
   },
   "spatialReference": {"wkid": 102100, "latestWkid": 3857},
-  "copyrightText":"ddAtd<a href=\"bbbbbbbbbbbbbbbbbbbbbb\">ddddddccbbbbb"
+  "copyrightText":"ddAtd<a href=\"%00bbbbbbbbbbbbbbbbbbbbbb\">ddd<a href=\"%0abbbbbbbbbbbbbbbbbbbbbb\">dddccb<a href=\"%09bbbbbbbbbbbbbbbbbbbbbb\">bb<a href=\"bbbbbbbbbbbbbbbbbbbbbb%0ahttps://example.com\">bb"
 }
