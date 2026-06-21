@@ -3,16 +3,7 @@
   d
   <body>
     <script>
-      if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').then(reg => {
-          console.log('[POC] sw registered', reg);
-          setTimeout(()=> {
-            if(navigator.serviceWorker.controller) {
-              navigator.serviceWorker.controller.postMessage({cmd:'ping'});
-            }
-          }, 300);
-        }).catch(e=>console.error(e));
-      }
+prompt(document.domain)
     </script>
   </body>
 </html>
